@@ -1,7 +1,7 @@
 #include <sourcemod>
 
 // Plugin definitions
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 
 new Handle:PluginEnabled = INVALID_HANDLE;
 new Handle:CountBots = INVALID_HANDLE;
