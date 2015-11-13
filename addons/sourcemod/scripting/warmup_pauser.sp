@@ -1,7 +1,7 @@
 #include <sourcemod>
 
 // Plugin definitions
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.1.0"
 
 new Handle:PluginEnabled = INVALID_HANDLE;
 new Handle:CountBots = INVALID_HANDLE;
@@ -32,9 +32,10 @@ public OnMapStart()
 { 
 	if(GetConVarBool(PluginEnabled))
 	{
-		ServerCommand("mp_warmup_pausetimer 1");
-		ServerCommand("mp_warmup_end");
+		ServerCommand("mp_do_warmup_period 1");
+		ServerCommand("mp_warmuptime 69");
 		ServerCommand("mp_warmup_start");
+		ServerCommand("mp_warmup_pausetimer 1");
 	}
 } 
 
