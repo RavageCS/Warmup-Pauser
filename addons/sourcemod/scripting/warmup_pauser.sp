@@ -1,7 +1,7 @@
 #include <sourcemod>
 
 // Plugin definitions
-#define PLUGIN_VERSION "1.1.0"
+#define PLUGIN_VERSION "1.2.0"
 
 new Handle:PluginEnabled = INVALID_HANDLE;
 new Handle:CountBots = INVALID_HANDLE;
@@ -27,30 +27,33 @@ public OnPluginStart()
 
 	AutoExecConfig(true, "warmup_pauser");
 }
-
-public OnMapStart() 
-{ 
-	if(GetConVarBool(PluginEnabled))
-	{
-		ServerCommand("mp_do_warmup_period 1");
-		ServerCommand("mp_warmuptime 69");
-		ServerCommand("mp_warmup_start");
-		ServerCommand("mp_warmup_pausetimer 1");
-	}
-} 
-
+ 
 public OnClientPutInServer(client)
 {
 	if(GetConVarBool(PluginEnabled))
 	{
 		if(GetConVarBool(CountBots))
 		{
-			if( GetClientCount(true) >= playerCount)
+			if(GetClientCount(true) < playerCount)
+			{
+				ServerCommand("mp_do_warmup_period 1");
+				ServerCommand("mp_warmuptime 25");
+				ServerCommand("mp_warmup_start");
+				ServerCommand("mp_warmup_pausetimer 1");
+			}
+			if(GetClientCount(true) >= playerCount)
 				ServerCommand("mp_warmup_pausetimer 0");
 		}
 		else
 		{
-			if( GetRealClientCount(true) >= playerCount)
+			if(GetClientCount(true) < playerCount)
+			{
+				ServerCommand("mp_do_warmup_period 1");
+				ServerCommand("mp_warmuptime 25");
+				ServerCommand("mp_warmup_start");
+				ServerCommand("mp_warmup_pausetimer 1");
+			}
+			if(GetRealClientCount(true) >= playerCount)
 				ServerCommand("mp_warmup_pausetimer 0");
 		}
 	}
